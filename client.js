@@ -8,9 +8,9 @@ const connect = function () {
     conn.on('data', (data) => {
       console.log('Server says: ', data);
     });
-
+  // Message shown on server when we connect
   conn.on('connect', () => {
-    conn.write('Hello from client!');
+    conn.write('Name: NHC');
   });
   // interpret incoming data as text
   conn.setEncoding("utf8");

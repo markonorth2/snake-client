@@ -9,13 +9,27 @@ const connect = function () {
       console.log('Server says: ', data);
     });
   // Message shown on server when we connect
-  conn.on('connect', () => {
-    conn.write('Name: NHC');
-  });
+    conn.on('connect', () => {
+      conn.write('Name: NHC');
+    });
   // interpret incoming data as text
   conn.setEncoding("utf8");
 
+  //Move up as soon as we connect
+    conn.on('connect', () => {
+      conn.write('Move: up');
+    });
+    
+    process.stdin.on('data', function(message){
+      conn.write(message);
+  });
+
+    conn.on('end', function(){
+      console.log('client disconnected from server');
+    });
   return conn;
+
+
 };
 
 module.exports = connect
